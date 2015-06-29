@@ -13,6 +13,7 @@
 		967D88391B41D4D3000476BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 967D88381B41D4D3000476BE /* Images.xcassets */; };
 		967D883C1B41D4D3000476BE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 967D883A1B41D4D3000476BE /* LaunchScreen.xib */; };
 		967D88481B41D4D3000476BE /* TipCalculator_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D88471B41D4D3000476BE /* TipCalculator_SwiftTests.swift */; };
+		967D88541B4209B8000476BE /* TipCalculatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D88531B4209B8000476BE /* TipCalculatorModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		967D88411B41D4D3000476BE /* TipCalculator-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TipCalculator-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		967D88461B41D4D3000476BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		967D88471B41D4D3000476BE /* TipCalculator_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCalculator_SwiftTests.swift; sourceTree = "<group>"; };
+		967D88531B4209B8000476BE /* TipCalculatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipCalculatorModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				967D88311B41D4D3000476BE /* AppDelegate.swift */,
 				967D88331B41D4D3000476BE /* ViewController.swift */,
+				967D88531B4209B8000476BE /* TipCalculatorModel.swift */,
 				967D88351B41D4D3000476BE /* Main.storyboard */,
 				967D88381B41D4D3000476BE /* Images.xcassets */,
 				967D883A1B41D4D3000476BE /* LaunchScreen.xib */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				967D88541B4209B8000476BE /* TipCalculatorModel.swift in Sources */,
 				967D88341B41D4D3000476BE /* ViewController.swift in Sources */,
 				967D88321B41D4D3000476BE /* AppDelegate.swift in Sources */,
 			);
