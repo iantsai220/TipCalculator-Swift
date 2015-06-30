@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C686DE32-8458-4E74-8750-BCA25C2782E3</string>
+	<string>4007ED05-7536-4176-8649-2B9436AC8EB8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>github.com:iantsai220/TipCalculator-Swift.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TipCalculatorPlayground.playground/playground.xcworkspace</string>
+	<string>Tuple.playground/playground.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5991F86F149D70A7A3614F9549854DBC9CB7E986</key>
