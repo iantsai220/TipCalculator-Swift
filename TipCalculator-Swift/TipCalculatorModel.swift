@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class TipCalculatorModel {
     var total: Double
     var taxPct: Double
@@ -25,9 +24,12 @@ class TipCalculatorModel {
         
     }
     
-    func calcTipWithTipPct(tipPct: Double) -> Double {
+    func calcTipWithTipPct(tipPct: Double) -> (tipAmt:Double, total:Double) {
         
-        return subTotal * tipPct
+        let tipAmt = subTotal * tipPct
+        let finaltTotal = total + tipAmt
+        
+        return (tipAmt, finaltTotal)
     }
     
     //    func printPossibleTips() {
@@ -46,12 +48,12 @@ class TipCalculatorModel {
     //
     //    }
     
-    func returnPossibleTips() -> [Int: Double] {
+    func returnPossibleTips() -> [Int: (tipAmt:Double, total:Double)] {
         
         let possibleTipsinferred = [0.15, 0.18, 0.20]
         let possibleTipsExplicit: [Double] = [0.15, 0.18, 0.20]
         
-        var retval = [Int: Double]()
+        var retval = Dictionary<Int, (tipAmt:Double, total:Double)>()
         for possibleTip in possibleTipsinferred {
             let intPct = Int(possibleTip * 100)
             retval[intPct] = calcTipWithTipPct(possibleTip)
@@ -60,5 +62,5 @@ class TipCalculatorModel {
         return retval
     }
     
-    
 }
+

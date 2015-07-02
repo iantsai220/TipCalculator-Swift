@@ -8,14 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var totalTextField: UITextField!
     @IBOutlet var taxPctSlider: UISlider!
     @IBOutlet var taxPctLabel: UILabel!
     @IBOutlet var resultsTaxView: UITextView!
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     let tipCalc = TipCalculatorModel(total: 33.25, taxPct: 0.06)
+    var possibleTips = Dictionary<Int, (tipAmt:Double, total:Double)>()
+    var sortedKeys:[Int] = []
+    
     
 
     override func viewDidLoad() {
@@ -31,13 +37,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sortedKeys.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        
+    }
+    
     func refreshUI() {
         
         totalTextField.text = String(format: "%0.2f", tipCalc.total)
         taxPctSlider.value = Float(tipCalc.taxPct) * 100
         taxPctLabel.text = "Tax Percentage (\(Int(taxPctSlider.value))%)"
-        
-        resultsTaxView.text = " "
         
     }
     
@@ -45,13 +59,8 @@ class ViewController: UIViewController {
         
         tipCalc.total = Double((totalTextField.text as NSString).doubleValue)
         let possibleTips = tipCalc.returnPossibleTips()
-        var result = " "
-        
-        for (tipPct, tipValue) in possibleTips {
-            result += "\(tipPct)%: \(tipValue)\n"
-        }
-        
-        resultsTaxView.text = result
+        sortedKeys = sorted(Array(possibleTips.keys))
+        tableView.reloadData()
     }
     
     @IBAction func taxPercentageChanged(sender: AnyObject) {
@@ -66,7 +75,7 @@ class ViewController: UIViewController {
         totalTextField.resignFirstResponder()
         
     }
-
+    
 
 }
 
