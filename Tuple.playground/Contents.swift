@@ -186,11 +186,38 @@ class LoggingDateSimulator: DateSimulatorDelegate {
     }
 }
 
-
-
-
 let sim = DateSimulator(a: Vicki(), b: Ray())
 sim.delegate = LoggingDateSimulator()
 sim.simulate()
 
+class TestDataSource: NSObject, UITableViewDataSource {
+    
+    let tipCalc = TipCalculatorModel(total: 33.25, taxPct: 0.06)
+    var possibleTips = Dictonary<Int, (tipAmt:Double, total:Double)>()
+    var sortedKeys:[Int] = []
+    
+    override init() {
+        possibleTips = tipCalc.returnPossibleTips()
+        sortedKeys = sorted(Array(possibleTips.keys))
+        super.init()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sortedKeys.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle, reuseIdentifier: nil)
+        let tipPct = sortedKeys[indexPath.row]
+        let tipAmt = possibleTips[tipPct]!.tipAmt
+        let total = possibleTips[tipPct]!.total
+        
+        cell.textLabel?.text = "\(tipPct)%:"
+        cell.detailTextLabel?.text = String(format:"Tip: $%0.2f, Total: $%0.2f", tipAmt, total)
+        
+        return cell
+        
+    }
+    
+}
 
