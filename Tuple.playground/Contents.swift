@@ -193,7 +193,7 @@ sim.simulate()
 class TestDataSource: NSObject, UITableViewDataSource {
     
     let tipCalc = TipCalculatorModel(total: 33.25, taxPct: 0.06)
-    var possibleTips = Dictonary<Int, (tipAmt:Double, total:Double)>()
+    var possibleTips = Dictionary<Int, (tipAmt:Double, total:Double)>()
     var sortedKeys:[Int] = []
     
     override init() {
@@ -207,7 +207,7 @@ class TestDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         let tipPct = sortedKeys[indexPath.row]
         let tipAmt = possibleTips[tipPct]!.tipAmt
         let total = possibleTips[tipPct]!.total
@@ -220,4 +220,10 @@ class TestDataSource: NSObject, UITableViewDataSource {
     }
     
 }
+
+let testDataSource = TestDataSource()
+let tableView = UITableView(frame: CGRect(x:0, y:0, width:320, height:320), style:.Plain)
+tableView.dataSource = testDataSource
+tableView.reloadData()
+
 
