@@ -148,6 +148,9 @@ class DateSimulator {
     let a:Speaker
     let b:Speaker
     
+    var delegate:DateSimulatorDelegate?
+
+    
     init(a:Speaker, b:Speaker) {
         
         self.a = a
@@ -166,5 +169,26 @@ class DateSimulator {
     }
 }
 
+protocol DateSimulatorDelegate {
+    func dateSimulatorDidStart(sim:DateSimulator, a:Speaker, b:Speaker)
+    func dateSimulatorDidEnd(sim:DateSimulator, a:Speaker, b:Speaker)
+}
+
+class LoggingDateSimulator: DateSimulatorDelegate {
+    
+    func dateSimulatorDidStart(sim: DateSimulator, a: Speaker, b: Speaker) {
+        println("Date started!")
+    }
+    func dateSimulatorDidEnd(sim: DateSimulator, a: Speaker, b: Speaker) {
+        println("Date Ended!")
+    }
+}
+
+
+
+
 let sim = DateSimulator(a: Vicki(), b: Ray())
+sim.delegate = LoggingDateSimulator()
 sim.simulate()
+
+
