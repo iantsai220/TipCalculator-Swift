@@ -1,6 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import UIKit
+import Foundation
 
 //let tipAndTotal = (4.00, 25.19)
 
@@ -31,3 +32,139 @@ func calcTipWithTipPct(tipPct:Double) ->(tipAmt:Double, total:Double) {
 }
 
 calcTipWithTipPct(0.20)
+
+class TipCalculatorModel {
+    var total: Double
+    var taxPct: Double
+    var subTotal: Double {
+        get {
+            return total / (taxPct + 1)
+        }
+    }
+    
+    init(total:Double, taxPct: Double) {
+        
+        self.total = total
+        self.taxPct = taxPct
+        
+    }
+    
+    func calcTipWithTipPct(tipPct: Double) -> (tipAmt:Double, total:Double) {
+        
+        let tipAmt = subTotal * tipPct
+        let finaltTotal = total + tipAmt
+        
+        return (tipAmt, finaltTotal)
+    }
+    
+    //    func printPossibleTips() {
+    //
+    ////        println("15% \(calcTipWithTipPct(0.15))")
+    ////        println("18% \(calcTipWithTipPct(0.18))")
+    ////        println("20% \(calcTipWithTipPct(0.20))")
+    //
+    //        let possibleTipsInferred = [0.15, 0.18, 0.20]
+    //        let possibleTipsExplicit: [Double] = [0.15, 0.18, 0.20]
+    //
+    //        for possibleTip in possibleTipsInferred {
+    //            println("\(possibleTip*100)%: \(calcTipWithTipPct(possibleTip))")
+    //
+    //        }
+    //
+    //    }
+    
+    func returnPossibleTips() -> [Int: (tipAmt:Double, total:Double)] {
+        
+        let possibleTipsinferred = [0.15, 0.18, 0.20]
+        let possibleTipsExplicit: [Double] = [0.15, 0.18, 0.20]
+        
+        var retval = Dictionary<Int, (tipAmt:Double, total:Double)>()
+        for possibleTip in possibleTipsinferred {
+            let intPct = Int(possibleTip * 100)
+            retval[intPct] = calcTipWithTipPct(possibleTip)
+        }
+        
+        return retval
+    }
+    
+}
+
+@objc protocol Speaker {
+    func Speak()
+    optional func TellJoke()
+}
+
+class Vicki: Speaker {
+    @objc func Speak() {
+        println("Hello I am Vicki!")
+    }
+    @objc func TellJoke() {
+        println("Q: what did sushi A say to sushi b")
+    }
+    
+}
+
+class Ray: Speaker {
+    @objc func Speak() {
+        println("Yo I am Ray")
+    }
+    @objc func TellJoke() {
+        println("Q: whats the objct oriented way to become wealthy")
+    }
+    
+    func WriteTutorial() {
+    
+        println("I'm on it")
+    }
+    
+    
+    
+}
+
+class Animal {
+    
+}
+
+class Dog: Animal, Speaker {
+    @objc func Speak() {
+        println("Woof!")
+    }
+}
+
+var speaker:Speaker
+speaker = Ray()
+speaker.Speak()
+(speaker as! Ray).WriteTutorial()
+speaker = Vicki()
+speaker.Speak()
+
+(speaker as! Vicki).TellJoke()
+speaker = Dog()
+speaker = Ray()
+speaker.TellJoke?()
+
+class DateSimulator {
+    
+    let a:Speaker
+    let b:Speaker
+    
+    init(a:Speaker, b:Speaker) {
+        
+        self.a = a
+        self.b = b
+        
+    }
+    
+    func simulate() {
+        
+        println("off to dinner ...")
+        a.Speak()
+        b.Speak()
+        println("Walking back home")
+        a.TellJoke?()
+        b.TellJoke?()
+    }
+}
+
+let sim = DateSimulator(a: Vicki(), b: Ray())
+sim.simulate()
