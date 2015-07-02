@@ -161,8 +161,10 @@ class DateSimulator {
     func simulate() {
         
         println("off to dinner ...")
+        delegate?.dateSimulatorDidStart(self, a: a, b: b)
         a.Speak()
         b.Speak()
+        delegate?.dateSimulatorDidEnd(self, a: a, b: b)
         println("Walking back home")
         a.TellJoke?()
         b.TellJoke?()
