@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var totalTextField: UITextField!
     @IBOutlet var taxPctSlider: UISlider!
@@ -44,6 +44,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        let tipPct = sortedKeys[indexPath.row]
+        
+        let tipAmt = possibleTips[tipPct]!.tipAmt
+        let total = possibleTips[tipPct]!.total
+        
+        cell.textLabel?.text = "\(tipPct)%:"
+        cell.detailTextLabel?.text = String(format:"Tip: $%0.2f, Total: $%0.2f", tipAmt, total)
+        
+        return cell
         
     }
     
@@ -58,7 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func calculateTapped(sender: AnyObject){
         
         tipCalc.total = Double((totalTextField.text as NSString).doubleValue)
-        let possibleTips = tipCalc.returnPossibleTips()
+        possibleTips = tipCalc.returnPossibleTips()
         sortedKeys = sorted(Array(possibleTips.keys))
         tableView.reloadData()
     }
